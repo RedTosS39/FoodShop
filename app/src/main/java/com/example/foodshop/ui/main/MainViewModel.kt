@@ -11,18 +11,15 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    val repositoryImpl = RepositoryImpl()
+    private val repositoryImpl = RepositoryImpl()
 
     private var _cityLabel = MutableLiveData<Location>()
     val cityLabel: LiveData<Location> get() = _cityLabel
 
-    init {
-        setupLiveData()
-    }
-     private fun setupLiveData() {
-         viewModelScope.launch {
-             val location = repositoryImpl.getLocation()
-             _cityLabel.postValue(location.value)
-         }
+    fun getParams(lon: Double, lat: Double) {
+        viewModelScope.launch {
+            val location = repositoryImpl.getLocation(lon, lat)
+            _cityLabel.postValue(location.value)
+        }
     }
 }

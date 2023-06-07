@@ -3,35 +3,32 @@ package com.example.foodshop.ui.main
 import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
-import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
-import com.example.foodshop.MainActivity
-import com.example.foodshop.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.foodshop.databinding.FragmentMainBinding
-import com.example.foodshop.databinding.ScreenOneCardViewBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 class MainFragment : Fragment() {
 
     private lateinit var fLocation: FusedLocationProviderClient
     private lateinit var pLauncher: ActivityResultLauncher<String>
+
     private var _binding: FragmentMainBinding? = null
     private val binding
         get() = _binding ?: throw RuntimeException("FragmentMainBinding == null")
@@ -69,7 +66,10 @@ class MainFragment : Fragment() {
 
         fLocation.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, cancelToken.token)
             .addOnCompleteListener {
-
+                lifecycleScope.launch {
+                    viewModel.getParams(it.result.latitude, it.result.longitude)
+                    Log.d("AAAA", "getLocation: ${it.result.latitude} ${ it.result.longitude}")
+                }
             }
     }
 
