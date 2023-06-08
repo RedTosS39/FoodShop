@@ -15,4 +15,6 @@ class MainViewModel : ViewModel() {
     private fun setupLiveData() {
         _cityLabel.value = "Saint Petersburg"
     }
+
+
 }

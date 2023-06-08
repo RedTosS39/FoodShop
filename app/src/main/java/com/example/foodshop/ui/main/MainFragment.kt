@@ -51,9 +51,7 @@ class MainFragment : Fragment() {
         val formatter = SimpleDateFormat("dd MMMM, yyyy")
         val date = Date()
         val current = formatter.format(date)
-
         binding.tvDateTime.text = current
-
     }
 
     override fun onDestroy() {
