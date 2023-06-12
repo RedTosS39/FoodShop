@@ -4,6 +4,7 @@ import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.databinding.FragmentMainBinding
 import com.example.foodshop.ui.adapter.CategoryAdapter
 import com.google.android.gms.location.LocationRequest
@@ -25,7 +27,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MainFragment : Fragment() {
-
 
     private lateinit var pLauncher: ActivityResultLauncher<String>
     private lateinit var categoryAdapter: CategoryAdapter
@@ -46,10 +47,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        observeViewModel()
         setupAdapter()
         isPermissionGranted()
         getLocation()
-        observeViewModel()
         setupDateTime()
     }
 
@@ -102,15 +103,15 @@ class MainFragment : Fragment() {
             binding.tvCityLabel.text = it[0].name
         }
 
-        viewModel.category.observe(viewLifecycleOwner) {
-            categoryAdapter.submitList(it)
-        }
     }
 
     private fun setupAdapter() {
         categoryAdapter = CategoryAdapter()
         binding.categoryRecycler.adapter = categoryAdapter
-
+        viewModel.category.observe(viewLifecycleOwner) {
+            categoryAdapter.submitList(it)
+        }
+        binding.categoryRecycler.layoutManager = LinearLayoutManager(requireActivity())
     }
 
     private fun setupDateTime() {

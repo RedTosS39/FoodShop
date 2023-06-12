@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.data.category.model.Category
 import com.example.data.category.model.CategoryList
 import com.example.data.category.response.CategoryApiService
+import kotlinx.coroutines.coroutineScope
 
 class RepositoryImpl {
     private val apiService =  LocationApiService.create()
@@ -24,13 +25,9 @@ class RepositoryImpl {
         return locationLiveData
     }
 
-
     suspend fun getCategory() : LiveData<List<Category>> {
-        try {
-            val result = categoryApiService.getCategoryApi()
-            categoryLiveData.postValue(result.categories)
-        } catch (_: Exception) {}
-
+        val result = categoryApiService.getCategoryApi()
+        categoryLiveData.value = result.сategories
         return categoryLiveData
     }
 }

@@ -15,11 +15,11 @@ interface CategoryApiService {
 
     companion object {
 
-        val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        private val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-        val client : OkHttpClient = OkHttpClient.Builder().apply {
+        private val client : OkHttpClient = OkHttpClient.Builder().apply {
             addInterceptor(interceptor)
         }.build()
 

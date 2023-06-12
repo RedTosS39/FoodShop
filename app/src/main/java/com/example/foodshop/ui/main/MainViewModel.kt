@@ -1,6 +1,7 @@
 package com.example.foodshop.ui.main
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -36,7 +37,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         viewModelScope.launch {
             val categoryList = repositoryImpl.getCategory()
-            _category.postValue(categoryList.value)
+            _category.value = categoryList.value
         }
     }
 }
