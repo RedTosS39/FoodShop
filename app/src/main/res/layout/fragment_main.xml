@@ -23,6 +23,7 @@
         android:layout_height="50dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivGeo"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,8 +31,8 @@
             android:id="@+id/tvCityLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nav_city_label"
             android:fontFamily="@font/sf_pro_display_bold"
+            android:text="@string/nav_city_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,8 +40,8 @@
             android:id="@+id/tvDateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12 Августа, 2023"
             android:fontFamily="@font/sf_pro_display_regular"
+            android:text="12 Августа, 2023"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/message" />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -55,9 +56,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,9 +3,10 @@ package com.example.foodshop.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.example.data.category.model.Category
 import com.example.foodshop.databinding.ScreenOneCardViewBinding
 
-class FirstScreenAdapter : ListAdapter<String, ItemViewHolder>(ItemDiffCallback) {
+class CategoryAdapter : ListAdapter<Category, ItemViewHolder>(ItemDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding =
             ScreenOneCardViewBinding.inflate(
@@ -17,6 +18,7 @@ class FirstScreenAdapter : ListAdapter<String, ItemViewHolder>(ItemDiffCallback)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val item = getItem(position)
+        holder.bind(item)
     }
 }

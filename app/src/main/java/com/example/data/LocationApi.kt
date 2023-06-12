@@ -5,8 +5,6 @@ import com.example.constants.Constants.MAP_API_KEY
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface LocationApiService {
@@ -19,7 +17,7 @@ interface LocationApiService {
 
     companion object  {
 
-        private const val BASE_URL = Constants.BASE_URL
+        private const val BASE_URL = Constants.LOCATION_BASE_URL
 
         fun create() : LocationApiService {
             val retrofit = Retrofit.Builder()
