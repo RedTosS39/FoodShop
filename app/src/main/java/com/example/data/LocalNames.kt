@@ -1,5 +1,8 @@
 package com.example.data
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class LocalNames(
     val af: String,
     val ar: String,
@@ -40,4 +43,4 @@ data class LocalNames(
     val tr: String,
     val vi: String,
     val zu: String
-)
+) : Parcelable

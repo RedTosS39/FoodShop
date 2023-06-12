@@ -1,3 +1,6 @@
 package com.example.data
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-class Location : ArrayList<LocationItem>()
+@Parcelize
+class Location : ArrayList<LocationItem>(), Parcelable

@@ -4,7 +4,6 @@ import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.foodshop.databinding.FragmentMainBinding
-import com.google.android.gms.location.FusedLocationProviderClient
+import com.example.foodshop.ui.adapter.CategoryAdapter
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -26,8 +26,9 @@ import java.util.*
 
 class MainFragment : Fragment() {
 
-    private lateinit var fLocation: FusedLocationProviderClient
+
     private lateinit var pLauncher: ActivityResultLauncher<String>
+    private lateinit var categoryAdapter: CategoryAdapter
 
     private var _binding: FragmentMainBinding? = null
     private val binding
@@ -45,30 +46,36 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        getLocation()
+        setupAdapter()
         isPermissionGranted()
+        getLocation()
         observeViewModel()
         setupDateTime()
     }
 
 
     private fun getLocation() {
-        fLocation = LocationServices.getFusedLocationProviderClient(requireContext())
+        val fLocation = LocationServices.getFusedLocationProviderClient(requireContext())
         val cancelToken = CancellationTokenSource()
-
-        if (ActivityCompat.checkSelfPermission(requireContext(),
-                ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+        if (ActivityCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
             return
         }
+        val locationRequest = LocationRequest
+            .Builder(1000L)
+            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+            .build()
 
-        fLocation.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, cancelToken.token)
+        fLocation.getCurrentLocation(locationRequest.priority, cancelToken.token)
             .addOnCompleteListener {
                 lifecycleScope.launch {
                     viewModel.getParams(it.result.latitude, it.result.longitude)
-                    Log.d("AAAA", "getLocation: ${it.result.latitude} ${ it.result.longitude}")
                 }
             }
     }
@@ -82,16 +89,28 @@ class MainFragment : Fragment() {
 
     private fun permissionListener() {
         pLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            Toast.makeText(requireActivity().applicationContext,
+            Toast.makeText(
+                requireActivity().applicationContext,
                 "Permission: $it",
-                Toast.LENGTH_SHORT).show()
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
     private fun observeViewModel() {
         viewModel.cityLabel.observe(viewLifecycleOwner) {
-            binding.tvCityLabel.text = it.get(0).name
+            binding.tvCityLabel.text = it[0].name
         }
+
+        viewModel.category.observe(viewLifecycleOwner) {
+            categoryAdapter.submitList(it)
+        }
+    }
+
+    private fun setupAdapter() {
+        categoryAdapter = CategoryAdapter()
+        binding.categoryRecycler.adapter = categoryAdapter
+
     }
 
     private fun setupDateTime() {
