@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'kotlin-parcelize'
 }
 
 android {
@@ -34,7 +33,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 }
@@ -44,6 +43,22 @@ dependencies {
     def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //location
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    //dagger
+    implementation 'com.google.dagger:dagger:2.46'
+    kapt 'com.google.dagger:dagger-compiler:2.46'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
