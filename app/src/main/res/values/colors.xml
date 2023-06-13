@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="checked">#3364E0</color>
     <color name="unchecked">#A5A9B2</color>
+    <color name="dishes_background">#F8F7F5</color>
 </resources>

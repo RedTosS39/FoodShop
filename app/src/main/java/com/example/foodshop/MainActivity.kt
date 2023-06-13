@@ -32,23 +32,21 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menu_home -> {
                     supportFragmentManager.beginTransaction()
-
                         .replace(R.id.container, MainFragment.newInstance())
                         .commit()
                 }
 
                 R.id.menu_search -> {
                     supportFragmentManager.beginTransaction()
-
                         .replace(R.id.container, DishesFragment.newInstance())
                         .commit()
                 }
 
                 R.id.menu_bag -> {
-                    Log.d("TAG", "setupMenu: ")
+                    Log.d("AAAA", "setupMenu: ")
                 }
                 R.id.menu_profile -> {
-                    Log.d("TAG", "setupMenu: ")
+                    Log.d("AAAA", "setupMenu: ")
                 }
             }
             true
