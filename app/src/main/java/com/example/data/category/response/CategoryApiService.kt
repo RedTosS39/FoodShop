@@ -1,7 +1,7 @@
 package com.example.data.category.response
 
 import com.example.constants.Constants.CATEGORY_BASE_URL
-import com.example.data.category.model.CategoryList
+import com.example.data.category.model.categories.CategoryList
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -15,19 +15,11 @@ interface CategoryApiService {
 
     companion object {
 
-        private val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-
-        private val client : OkHttpClient = OkHttpClient.Builder().apply {
-            addInterceptor(interceptor)
-        }.build()
 
         fun create() : CategoryApiService {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(CATEGORY_BASE_URL)
-                .client(client)
                 .build()
             return retrofit.create(CategoryApiService::class.java)
         }

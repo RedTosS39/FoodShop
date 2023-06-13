@@ -2,6 +2,7 @@ package com.example.data
 
 import com.example.constants.Constants
 import com.example.constants.Constants.MAP_API_KEY
+import com.example.data.category.model.location.Location
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

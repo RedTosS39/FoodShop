@@ -6,4 +6,5 @@
     <string name="menu_bag">Корзина</string>
     <string name="menu_profile">Аккаунт</string>
     <string name="category_label">Category Label</string>
+    <string name="horizontal_dish_label">Horizontal Dish Label</string>
 </resources>
