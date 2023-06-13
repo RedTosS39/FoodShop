@@ -1,14 +1,13 @@
 package com.example.foodshop.ui.main
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.data.Location
+import com.example.data.category.model.location.Location
 import com.example.data.RepositoryImpl
-import com.example.data.category.model.Category
+import com.example.data.category.model.categories.Category
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {

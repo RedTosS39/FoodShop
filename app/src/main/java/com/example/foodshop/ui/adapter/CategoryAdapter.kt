@@ -3,7 +3,7 @@ package com.example.foodshop.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.example.data.category.model.Category
+import com.example.data.category.model.categories.Category
 import com.example.foodshop.databinding.ScreenOneCardViewBinding
 
 class CategoryAdapter : ListAdapter<Category, ItemViewHolder>(ItemDiffCallback) {
