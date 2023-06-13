@@ -8,7 +8,7 @@ import com.squareup.picasso.Picasso
 class DishesViewHolder(private val binding: DishesCardViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(dish: Dishe) {
-        Picasso.get().load(dish.image_url).into(binding.imageView2)
+        Picasso.get().load(dish.image_url).into(binding.ivDishLogo)
         binding.dishLabel.text = dish.name
     }
 }

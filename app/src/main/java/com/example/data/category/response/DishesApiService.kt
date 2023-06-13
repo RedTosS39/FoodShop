@@ -5,6 +5,7 @@ import com.example.data.category.model.dishes.Dishes
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface DishesApiService {
@@ -23,6 +24,7 @@ interface DishesApiService {
 
         fun create(): DishesApiService {
             val retrofit = Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(DISHES_BASE_URL)
                 .client(client)
                 .build()

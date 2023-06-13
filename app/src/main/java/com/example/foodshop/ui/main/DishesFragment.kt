@@ -41,10 +41,10 @@ class DishesFragment : Fragment() {
         adapter = DishesAdapter()
         binding.dishesRecycler.adapter = adapter
 
-        binding.dishesRecycler.layoutManager = GridLayoutManager(requireActivity(), 3)
         viewModel.dishesLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
+        binding.dishesRecycler.layoutManager = GridLayoutManager(requireActivity(), 3)
     }
 
 
