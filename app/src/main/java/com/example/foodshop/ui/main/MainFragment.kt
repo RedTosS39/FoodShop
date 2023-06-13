@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.foodshop.R
 import com.example.foodshop.databinding.FragmentMainBinding
 import com.example.foodshop.ui.adapter.CategoryAdapter
 import com.google.android.gms.location.LocationRequest
@@ -49,10 +50,12 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         observeViewModel()
         setupAdapter()
+
         isPermissionGranted()
         getLocation()
         setupDateTime()
     }
+
 
 
     private fun getLocation() {
@@ -112,6 +115,21 @@ class MainFragment : Fragment() {
             categoryAdapter.submitList(it)
         }
         binding.categoryRecycler.layoutManager = LinearLayoutManager(requireActivity())
+        setupClickListener()
+    }
+
+    private fun setupClickListener() {
+        categoryAdapter.onItemClickListener = {
+            launchFragment(DishesFragment.newInstance(it.name))
+        }
+    }
+
+    private fun launchFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.popBackStack()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun setupDateTime() {

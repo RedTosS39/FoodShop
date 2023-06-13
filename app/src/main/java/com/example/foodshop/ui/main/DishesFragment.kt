@@ -1,20 +1,21 @@
 package com.example.foodshop.ui.main
 
-import androidx.lifecycle.ViewModelProvider
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.foodshop.R
 import com.example.foodshop.databinding.FragmentDishesBinding
-import com.example.foodshop.databinding.FragmentMainBinding
 import com.example.foodshop.ui.adapter.DishesAdapter
+
 
 class DishesFragment : Fragment() {
 
-    val viewModel by lazy {
+    private val viewModel by lazy {
         ViewModelProvider(this)[DishesViewModel::class.java]
     }
 
@@ -28,12 +29,21 @@ class DishesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDishesBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
         setupAdapter()
+
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarLabel.text =  arguments?.getString(ARGS_KEY, ERROR_ARGS)
+        binding.toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     private fun setupAdapter() {
@@ -54,6 +64,16 @@ class DishesFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = DishesFragment()
+
+        private const val ARGS_KEY = "DishesFragment_ARGS_KEY"
+        private const val ERROR_ARGS = "No args"
+
+        fun newInstance(dishLabel: String): DishesFragment {
+            return DishesFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARGS_KEY, dishLabel)
+                }
+            }
+        }
     }
 }
