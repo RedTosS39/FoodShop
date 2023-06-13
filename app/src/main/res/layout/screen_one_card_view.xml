@@ -8,22 +8,13 @@
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
         <ImageButton
             android:id="@+id/materialButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/category_label"
             android:padding="0dp"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/categoryLabel"
@@ -32,15 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:layout_weight="0.5"
-            android:lines="2"
             android:text="@string/category_label"
             android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textStyle="bold" />
 
 </androidx.cardview.widget.CardView>

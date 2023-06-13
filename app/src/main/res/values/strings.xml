@@ -8,4 +8,5 @@
     <string name="category_label">Category Label</string>
     <string name="horizontal_dish_label">Horizontal Dish Label</string>
     <string name="dish_label">Dish label</string>
+    <string name="icon">user icon</string>
 </resources>

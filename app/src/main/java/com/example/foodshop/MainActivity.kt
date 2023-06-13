@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
+                .replace(R.id.container, MainFragment.newInstance()).commitNow()
         }
         setupMenu()
     }
@@ -32,21 +31,18 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menu_home -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, MainFragment.newInstance())
-                        .commit()
+                        .replace(R.id.container, MainFragment.newInstance()).commit()
                 }
 
                 R.id.menu_search -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, DishesFragment.newInstance())
-                        .commit()
+                    Log.d("AAAA", "menu_search: ")
                 }
 
                 R.id.menu_bag -> {
-                    Log.d("AAAA", "setupMenu: ")
+                    Log.d("AAAA", "menu_bag: ")
                 }
                 R.id.menu_profile -> {
-                    Log.d("AAAA", "setupMenu: ")
+                    Log.d("AAAA", "menu_profile: ")
                 }
             }
             true
